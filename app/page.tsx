@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from "react";
 type Screen = "landing" | "camera" | "preview";
 
 const FRAMES = [
-  { src: "./wedding-frame-1.png", name: "Garden" },
-  { src: "./wedding-frame-2.png", name: "Celebration" },
-  { src: "./wedding-frame-3.png", name: "Classic" },
+  { src: "./wedding-frame-1.png", name: "Frame 1" },
+  { src: "./wedding-frame-2.png", name: "Frame 2" },
+  { src: "./wedding-frame-3.png", name: "Frame 3" },
 ] as const;
 const OUTPUT_WIDTH = 1080;
 const OUTPUT_HEIGHT = 1350;
@@ -217,7 +217,7 @@ export default function Home() {
     await startCamera(facingMode);
   }
 
-  async function downloadPhoto() {
+  async function sharePhoto() {
     const blob = photoBlobRef.current;
     if (!photoUrl || !blob) return;
     const filename = `cocktail-cam-${Date.now()}.jpg`;
@@ -254,8 +254,8 @@ export default function Home() {
       {screen === "landing" && (
         <section className="landing-screen" aria-labelledby="welcome-title">
           <div className="eyebrow">⸜(⸝⸝⸝´꒳`⸝⸝⸝)⸝ 🩵</div>
-          <h1 id="welcome-title">Lookin&apos; good! Snap a pic or two with us~</h1>
-          <p>Choose a fun frame, take your pic(s), and save them straight to your phone!</p>
+          <h1 id="welcome-title">Lookin good! Take some pictures ✨</h1>
+          <p>Choose a fun frame, take your pic, and save them straight to your phone! Frames designed by Candy 🫰</p>
           <div className="photo-card" aria-hidden="true">
             <div className="photo-card-inner">
               <span className="sparkle sparkle-one">✦</span>
@@ -268,7 +268,10 @@ export default function Home() {
             <span className="button-icon" aria-hidden="true">●</span>
             {isStarting ? "Opening Camera…" : "Open Camera"}
           </button>
-          <p className="privacy-note">Your photo stays on this device.</p>
+          <p className="privacy-note">
+            Allow camera access when prompted. Your photos are never uploaded or stored online.
+            <span>For the smoothest experience, use Safari or Chrome.</span>
+          </p>
           {message && <p className="status-message" role="status">{message}</p>}
         </section>
       )}
@@ -286,7 +289,6 @@ export default function Home() {
             />
             <img className="live-frame" src={FRAMES[selectedFrameIndex].src} alt="" />
             {countdown !== null && <div className="countdown" aria-live="assertive">{countdown}</div>}
-            <div className="camera-tip">Center yourself in the frame</div>
           </div>
           <div className="camera-controls">
             <button className="round-button" onClick={() => startCamera(facingMode)} aria-label="Restart camera">↻</button>
@@ -307,20 +309,23 @@ export default function Home() {
       {screen === "preview" && (
         <section className="preview-screen" aria-labelledby="preview-title">
           <div className="eyebrow">WOWIE! (ﾉ◕ヮ◕)ﾉ✨</div>
-          <h1 id="preview-title">Here you go! Remember to save this to your phone.</h1>
+          <h1 id="preview-title">Done! Long press the pic to save to your device.</h1>
           <div className="result-frame">
             {photoUrl && <img src={photoUrl} alt="Your framed cocktail cam photo" />}
           </div>
           <div className="preview-actions">
             <button className="secondary-button" onClick={retake}>Retake</button>
-            <button className="primary-button" onClick={downloadPhoto}>Save Photo</button>
+            <button className="primary-button" onClick={sharePhoto}>Share Photo</button>
           </div>
           <button className="frame-button preview-frame-button" onClick={changeFrame} disabled={isChangingFrame}>
             <span aria-hidden="true">▣</span>
             {isChangingFrame ? "Changing Frame…" : `Change Frame · ${selectedFrameIndex + 1} of ${FRAMES.length}`}
           </button>
           {message && <p className="status-message" role="status">{message}</p>}
-          <p className="save-help">On iPhone, you can also press and hold the photo to save it.</p>
+          <p className="save-help">
+            Feel free to tag us on Instagram at @terren.lee and @cz.uvu! Thank you for celebrating with us 🫶(´ ε ` )♡
+            And don&apos;t forget to stop by our print photobooth at the reception tonight!
+          </p>
         </section>
       )}
 

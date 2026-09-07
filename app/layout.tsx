@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "C&T's Digital Photobooth",
   description: "Choose a fun frame, take a pic, and save it straight to your phone.",
-  icons: { icon: "favicon.svg" },
+  icons: { icon: "./favicon.png" },
 };
 
 export const viewport: Viewport = {
