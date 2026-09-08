@@ -258,10 +258,7 @@ export default function Home() {
           <p>Choose a fun frame, take your pic, and save them straight to your phone! Frames designed by Candy 🫰</p>
           <div className="photo-card" aria-hidden="true">
             <div className="photo-card-inner">
-              <span className="sparkle sparkle-one">✦</span>
-              <span className="heart">♥</span>
-              <span className="sparkle sparkle-two">✦</span>
-              <span className="photo-card-copy">CHEERS<br /><small>TO LOVE</small></span>
+              <img className="homepage-gif" src="./tc-digicam.gif" alt="" />
             </div>
           </div>
           <button className="primary-button" onClick={() => startCamera()} disabled={isStarting}>
